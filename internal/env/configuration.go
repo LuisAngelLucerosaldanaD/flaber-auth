@@ -2,7 +2,6 @@ package env
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"sync"
@@ -64,7 +63,6 @@ func fromFile() {
 		}
 
 		err = json.Unmarshal(b, config)
-		fmt.Println(config)
 		if err != nil {
 			log.Fatalf("no se pudo parsear el archivo de configuración: %s", err.Error())
 		}

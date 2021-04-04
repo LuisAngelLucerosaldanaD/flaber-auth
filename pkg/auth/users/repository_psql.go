@@ -55,7 +55,7 @@ func (s *psql) Update(m *User) error {
 }
 
 func (s *psql) getByEmail(email string) (*User, error)  {
-	const QueryGetUserByEmail = `select id, username, name, lastname, email, password, dni, phone as cellphone, from auth.user where email = $1`
+	const QueryGetUserByEmail = `select id, name, lastname, email, password, dni, phone as cellphone from auth.user where email = $1`
 	mdl := User{}
 	err := s.DB.Get(&mdl,QueryGetUserByEmail, email)
 	if err != nil {
@@ -69,7 +69,7 @@ func (s *psql) getByEmail(email string) (*User, error)  {
 }
 
 func (s *psql) getByCellphone(cellphone string) (*User, error)  {
-	const QueryGetUserByCellphone = `select id, username, name, lastname, email, password, dni, phone as cellphone from auth.user where phone = $1`
+	const QueryGetUserByCellphone = `select id, name, lastname, email, password, dni, phone as cellphone from auth.user where phone = $1`
 	mdl := User{}
 	err := s.DB.Get(&mdl,QueryGetUserByCellphone, cellphone)
 	if err != nil {

@@ -32,7 +32,7 @@ func (h *Handler) CreateUser(c *fiber.Ctx) error {
 	srvNxm := auth.NewServerAuth(h.DB, nil, h.TxID)
 	usr, cod, err := srvNxm.SrvUsers.CreateUser(m.ID, m.Name, m.LastName, m.Password, m.EmailNotifications, m.IdentificationNumber, m.Cellphone)
 	if err != nil {
-		res.Code = 1
+		res.Code = cod
 		res.Type = "Error"
 		res.Msg = "don't create user"
 		logger.Error.Println("No se pudo crear el usuario: %v", err)

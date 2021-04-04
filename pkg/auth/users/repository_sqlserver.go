@@ -24,7 +24,7 @@ func NewUserSqlServerRepository(db *sqlx.DB, user *models.User, txID string) *sq
 }
 
 func (s *sqlserver) Create(m *User) error  {
-	const sqlQueryCreateUser = `insert into auth.user (id, dni, username, name, lastname, phone, email, password, created_at, updated_at) values (:id, :dni, :username, :name, :lastname, :cellphone, :email, :password, :created_at, :updated_at`
+	const sqlQueryCreateUser = `insert into auth.user (id, dni name, lastname, phone, email, password, created_at, updated_at) values (:id, :dni, :name, :lastname, :cellphone, :email, :password, :created_at, :updated_at`
 	rs, err := s.DB.NamedExec(sqlQueryCreateUser, &m)
 	if err != nil {
 		logger.Error.Println(s.TxID, " - couldn't insert User: %V", err)
@@ -51,7 +51,7 @@ func (s *sqlserver) Update(m *User) error {
 }
 
 func (s *sqlserver) getByEmail(email string) (*User, error)  {
-	const QueryGetUserByEmail = `select id, username, name, lastname, email, password, dni, phone as cellphone, from auth.user where email = @email`
+	const QueryGetUserByEmail = `select id, name, lastname, email, password, dni, phone as cellphone from auth.user where email = @email`
 	mdl := User{}
 	err := s.DB.Get(&mdl,QueryGetUserByEmail, sql.Named("email",email))
 	if err != nil {
@@ -65,7 +65,7 @@ func (s *sqlserver) getByEmail(email string) (*User, error)  {
 }
 
 func (s *sqlserver) getByCellphone(cellphone string) (*User, error)  {
-	const QueryGetUserByCellphone = `select id, username, name, lastname, email, password, dni, phone as cellphone, from auth.user where phone = @phone`
+	const QueryGetUserByCellphone = `select id, name, lastname, email, password, dni, phone as cellphone from auth.user where phone = @phone`
 	mdl := User{}
 	err := s.DB.Get(&mdl,QueryGetUserByCellphone, sql.Named("phone",cellphone))
 	if err != nil {

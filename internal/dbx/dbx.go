@@ -1,14 +1,17 @@
 package dbx
 
 import (
-	"flaber-auth/internal/env"
-	"flaber-auth/internal/logger"
 	"fmt"
-	"github.com/jmoiron/sqlx"
-	_ "github.com/denisenkom/go-mssqldb"
-	_ "github.com/go-sql-driver/mysql"
 	"strings"
 	"sync"
+
+	"flaber-auth/internal/env"
+
+	_ "github.com/denisenkom/go-mssqldb"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
+	"flaber-auth/internal/logger"
 )
 
 var (

@@ -1,15 +1,48 @@
+# Created by https://www.gitignore.io/api/go
+### Go ###
 # Binaries for programs and plugins
 *.exe
-*.exe~
 *.dll
 *.so
 *.dylib
+ecatch-engine
+bin-lleida-clickandsign
 
-# Test binary, built with `go test -c`
+# Test binary, build with `go test -c`
 *.test
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
+.glide/
+
+# End of https://www.gitignore.io/api/go
+
+# Variables de entorno
+.env
+config.json
+
+# Directorios usados por los IDE de jetbrains
+.idea/
+.vscode/
+
+# Directorios de log (innecesarios para seguir
+log/
+
+# Directorios de repository (innecesarios para seguir
+repository/
+.repository/
+templates/
+System/
+
+# Directorios de key rsa
+rsa/
+
+# Directorios de certificados ssl
+certificates/
+
+.idea/
+
+.idea
+/templates/

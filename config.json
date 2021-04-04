@@ -1,0 +1,29 @@
+{
+  "app":{
+    "service_name": "Flaber-auth",
+    "port": 50040,
+    "allowed_domains": "*",
+    "path_log": "./log",
+    "log_review_interval":60,
+    "register_log": true,
+    "rsa_private_key": "../rsa/app.rsa",
+    "rsa_public_key": "../rsa/app.rsa.pub",
+    "logger_http": false
+  },
+  "db": {
+    "engine": "postgres",
+    "server": "localhost",
+    "port": 5432,
+    "name": "fluber",
+    "user": "postgres",
+    "password": "root",
+    "instance": "",
+    "is_secure": false
+  },
+  "smtp" : {
+    "smtp_port": 587,
+    "smtp_host": "in-v3.mailjet.com",
+    "smtp_email": "07366c0397ed0e45ed555e75c48247c3",
+    "smtp_password": "2565011db3640655f1c16e9ad2669561"
+  }
+}

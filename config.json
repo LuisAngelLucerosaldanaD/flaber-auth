@@ -21,9 +21,9 @@
     "is_secure": false
   },
   "smtp" : {
-    "smtp_port": 587,
-    "smtp_host": "in-v3.mailjet.com",
-    "smtp_email": "07366c0397ed0e45ed555e75c48247c3",
-    "smtp_password": "2565011db3640655f1c16e9ad2669561"
+    "smtp_port": 465,
+    "smtp_host": "smtp.gmail.com",
+    "smtp_email": "luisangellucerosaldana20@gmail.com",
+    "smtp_password": "angel_12345"
   }
 }

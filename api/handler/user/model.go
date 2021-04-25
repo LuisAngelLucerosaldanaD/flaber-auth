@@ -10,7 +10,11 @@ type responseChangePassword struct {
 }
 
 type requestRecoveryPassword struct {
-	Nickname string `json:"nickname"`
+	Email    string `json:"email"`
+	UserCode int64	`json:"user_code"`
+}
+
+type requestValidAndChangeCode struct {
 	Email    string `json:"email"`
 }
 

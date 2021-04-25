@@ -7,14 +7,14 @@ import (
 
 type User models.User
 
-func NewUser(id, name, lastName, email, dni, cellphone string) *User {
+func NewUser(id, name, lastName, email, cellphone string, userCode int64) *User {
 	return &User{
 		ID: id,
 		Name: name,
 		LastName: lastName,
 		EmailNotifications: email,
-		IdentificationNumber: dni,
 		Cellphone: cellphone,
+		UserCode: userCode,
 	}
 }
 

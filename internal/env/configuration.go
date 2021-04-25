@@ -42,10 +42,10 @@ type DB struct {
 	SSLMode  string `json:"ssl_mode"`
 }
 type Smtp struct {
-	Port     int    `json:"port"`
-	Host     string `json:"host"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Port     int    `json:"smtp_port"`
+	Host     string `json:"smtp_host"`
+	Email    string `json:"smtp_email"`
+	Password string `json:"smtp_password"`
 }
 
 func NewConfiguration() *configuration {

@@ -16,6 +16,9 @@ type ServicesUserRepository interface {
 	Update(m *User) error
 	getByEmail(email string) (*User, error)
 	getByCellphone(cellphone string) (*User, error)
+	UpdateCodeByEmailAndUserID(code int64, email, userID string) error
+	UpdatePasswordByUserId(password, userId string) error
+	GetUserById(userId string) (*User, error)
 }
 
 func FactoryStorage(db *sqlx.DB, user *models.User, txID string) ServicesUserRepository {

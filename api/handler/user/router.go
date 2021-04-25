@@ -13,6 +13,7 @@ func UserRouter(app *fiber.App, db *sqlx.DB, tx string) {
 	v1.Post("/register", usr.CreateUser)
 	v1.Post("/change-password", usr.ChangePassword)
 	v1.Post("/recovery-password", usr.RecoveryPassword)
+	v1.Post("/valid-email-send-code", usr.ValidEmailAndSaveCode)
 /*	v1.Get("/user-exist", usr.ExistUser)*/
 	v1.Post("/email-exist", usr.ExistEmail)
 }

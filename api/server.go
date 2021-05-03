@@ -2,14 +2,14 @@ package api
 
 import (
 	"fmt"
-	"log"
-	"github.com/gofiber/fiber/v2"
 	"github.com/fatih/color"
+	"github.com/gofiber/fiber/v2"
+	"log"
 )
 
 const (
-	version = "0.0.1"
-	website = "https://www.luislucero.dev - https://juancxh.com"
+	version = "0.0.2"
+	website = "https://luislucero.dev - https://juancx.dev"
 	banner  = `
 ███████╗██╗░░░░░░█████╗ ██████╗ ███████╗██████╗░░░░░░░░█████╗░██╗░░░██╗████████╗██╗░░██╗
 ██╔════╝██║░░░░░██╔══██╗██╔══██╗██╔════╝██╔══██╗░░░░░░██╔══██╗██║░░░██║╚══██╔══╝██║░░██║

@@ -29,7 +29,7 @@ func (s *psql) Create(m *User) error  {
 	m.CreatedAt = date
 	m.UpdatedAt = date
 	const sqlQueryCreateUser = `INSERT INTO auth."user" (id, name, lastname, phone, email, password, created_at, updated_at, user_code, is_deleted) 
-	VALUES (:id, :name, :lastname, :cellphone, :email, :password, :created_at, :updated_at, :user_code, false);`
+	VALUES (:id, :name, :lastname, :phone, :email, :password, :created_at, :updated_at, :user_code, false);`
 	rs, err := s.DB.NamedExec(sqlQueryCreateUser, &m)
 	if err != nil {
 		logger.Error.Println(s.TxID, " - couldn't insert User: %V", err)

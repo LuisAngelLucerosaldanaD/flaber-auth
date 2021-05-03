@@ -5,6 +5,7 @@ import (
 	"flaber-auth/internal/models"
 	"flaber-auth/pkg/actions"
 	"flaber-auth/pkg/auth"
+	"flaber-auth/pkg/auth/login"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
@@ -18,7 +19,7 @@ type Handler struct {
 	TxID string
 }
 func (h *Handler) CreateUser(c *fiber.Ctx) error {
-	res := models.Response{Error: false}
+	res := models.Response{Error: true}
 	m := models.User{}
 	err := c.BodyParser(&m)
 	if err != nil {
@@ -41,9 +42,26 @@ func (h *Handler) CreateUser(c *fiber.Ctx) error {
 		logger.Error.Println("No se pudo crear el usuario: %v", err)
 		return c.Status(http.StatusAccepted).JSON(res)
 	}
-	usr.Password = ""
-	res.Data = usr
-	res.Code = cod
+	user := models.User{
+		ID:                 usr.ID,
+		Name:               usr.Name,
+		LastName:           usr.LastName,
+		EmailNotifications: usr.EmailNotifications,
+		UserCode:           usr.UserCode,
+		HostName:           c.Hostname(),
+		RealIP:             c.IP(),
+		Cellphone:          usr.Cellphone,
+	}
+	token, code, err := login.GenerateJWT(&user)
+	if err != nil {
+		res.Code = code
+		res.Type = "Error"
+		res.Msg = "don't create user"
+		logger.Error.Println("No se pudo crear el token: %v", err)
+		return c.Status(http.StatusAccepted).JSON(res)
+	}
+	res.Data = token
+	res.Code = 29
 	res.Type = "success"
 	res.Msg = "El usuario ha sido creado exitosamente"
 	res.Error = false
@@ -51,7 +69,7 @@ func (h *Handler) CreateUser(c *fiber.Ctx) error {
 }
 
 func (h *Handler) ChangePassword(c *fiber.Ctx) error {
-	res := models.Response{Error: false}
+	res := models.Response{Error: true}
 	m := requestChangePassword{}
 	err := c.BodyParser(&m)
 	if err != nil {
@@ -88,7 +106,7 @@ func (h *Handler) ChangePassword(c *fiber.Ctx) error {
 }
 
 func (h *Handler) RecoveryPassword(c *fiber.Ctx) error {
-	res := models.Response{Error: false}
+	res := models.Response{Error: true}
 	m := requestRecoveryPassword{}
 	err := c.BodyParser(&m)
 	if err != nil {
@@ -135,7 +153,7 @@ func (h *Handler) RecoveryPassword(c *fiber.Ctx) error {
 func (h *Handler) ValidEmailAndSaveCode(c *fiber.Ctx) error {
 	min := 1000
 	max := 9999
-	res := models.Response{Error: false}
+	res := models.Response{Error: true}
 	m := requestValidAndChangeCode{}
 	var userCode int64
 	err := c.BodyParser(&m)
@@ -203,7 +221,7 @@ func (h *Handler) ValidEmailAndSaveCode(c *fiber.Ctx) error {
 }
 
 func (h *Handler) ExistEmail(c *fiber.Ctx) error {
-	res := models.Response{Error: false}
+	res := models.Response{Error: true}
 	m := RequestExistEmail{}
 	err := c.BodyParser(&m)
 	if err != nil {
